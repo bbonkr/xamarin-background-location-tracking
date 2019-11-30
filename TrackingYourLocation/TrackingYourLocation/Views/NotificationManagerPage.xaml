@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewmodel="clr-namespace:TrackingYourLocation.ViewModels"
+             mc:Ignorable="d"
+             x:Class="TrackingYourLocation.Views.NotificationManagerPage">
+    <d:ContentPage.BindingContext>
+        <viewmodel:NotificationManagerViewModel />
+    </d:ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Margin="0,35,0,0"
+                     x:Name="stackLayout">
+            <Label Text="Click the button to create a local notification."
+                   TextColor="Red"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Start" />
+            <Entry Text="{Binding NotificationTitle}"
+                   Placeholder="Title" />
+            <Entry Text="{Binding NotificationMessage}"
+                   Placeholder="Message" />
+            <Button Text="Create Notification"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Start"
+                    Command="{Binding SendNotificationCommand}"
+                     />
+            <CollectionView ItemsSource="{Binding Notifications}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Grid.Row="0" 
+                                   Text="{Binding Title}" 
+                                   FontSize="Default" />
+                            <Label Grid.Row="1" 
+                                   Text="{Binding Message}"
+                                   FontSize="Small" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
